@@ -20,27 +20,29 @@ function StudentList() {
       const response = await axios.get(API_URL);
       setStudents(response.data);
     } catch (error) {
-      console.error("Error fetching students:", error);
+      console.error("Error fetching students:", error.response ? error.response.data : error.message);
+      alert("Failed to fetch students. Please try again later.");
     }
   };
 
   const saveStudent = async () => {
     try {
       const studentData = { name, age, grade };
-
+  
       if (editingId) {
         await axios.put(`${API_URL}/${editingId}`, studentData);
         setEditingId(null);
       } else {
         await axios.post(API_URL, studentData);
       }
-
+  
       setName('');
       setAge('');
       setGrade('');
       fetchStudents();
     } catch (error) {
-      console.error("Error saving student:", error);
+      console.error("Error saving student:", error.response ? error.response.data : error.message);
+      alert("Failed to save student. Please try again later.");
     }
   };
 
@@ -49,7 +51,8 @@ function StudentList() {
       await axios.delete(`${API_URL}/${id}`);
       fetchStudents();
     } catch (error) {
-      console.error("Error deleting student:", error);
+      console.error("Error deleting student:", error.response ? error.response.data : error.message);
+      alert("Failed to delete student. Please try again later.");
     }
   };
 
