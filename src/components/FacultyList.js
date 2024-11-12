@@ -10,7 +10,7 @@ function FacultyList() {
   const [age, setAge] = useState('');
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "https://crud-operations-ada6.onrender.com/api/faculties";
+  const API_URL = "https://crud-operations-ada6.onrender.com/api";
 
   useEffect(() => {
     fetchFaculties();
