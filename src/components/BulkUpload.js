@@ -24,10 +24,10 @@ function BulkUpload() {
     formData.append('file', studentFile);
 
     try {
-      const response = await axios.post('/api/upload/student', formData, {
+      const response = await axios.post('https://crud-operations-ada6.onrender.com/api/students/bulk-upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setMessage(response.data.message);
+      setMessage(response.data.message || 'Student data uploaded successfully');
     } catch (err) {
       setMessage('Error uploading student file');
     }
@@ -43,10 +43,10 @@ function BulkUpload() {
     formData.append('file', facultyFile);
 
     try {
-      const response = await axios.post('/api/upload/faculty', formData, {
+      const response = await axios.post('https://crud-operations-ada6.onrender.com/api/faculties/bulk-upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setMessage(response.data.message);
+      setMessage(response.data.message || 'Faculty data uploaded successfully');
     } catch (err) {
       setMessage('Error uploading faculty file');
     }
