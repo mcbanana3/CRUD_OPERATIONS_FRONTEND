@@ -1,52 +1,28 @@
 import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
 import StudentList from './components/StudentList';
 import FacultyList from './components/FacultyList';
+import BulkUpload from './components/BulkUpload';
 import './App.css'; // Import the custom CSS file
 
 function App() {
-  const [currentView, setCurrentView] = useState(null); // Track the current view
+  const [currentPage, setCurrentPage] = useState('home'); // Track the current page
 
-  const handleViewChange = (view) => {
-    setCurrentView(view);
+  // Handle page change (Switch between Home, Students, Faculties, and Bulk Upload)
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
-    <div className="container py-5 text-center">
-      {!currentView ? (
-        <>
-          {/* Home Page - Contains Heading and Buttons */}
-          <h1 className="display-4 text-primary font-weight-bold mb-4">
-            University Management System
-          </h1>
-
-          <div className="button-container mb-4">
-            <button
-              className="btn btn-outline-primary btn-lg mx-3"
-              onClick={() => handleViewChange('students')}
-            >
-              Students
-            </button>
-            <button
-              className="btn btn-outline-success btn-lg mx-3"
-              onClick={() => handleViewChange('faculties')}
-            >
-              Faculties
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-          {/* Conditional Rendering Based on the Current View */}
-          <button
-            className="btn btn-secondary mb-4"
-            onClick={() => setCurrentView(null)}
-          >
-            Back to Home
-          </button>
-          {currentView === 'students' && <StudentList />}
-          {currentView === 'faculties' && <FacultyList />}
-        </>
-      )}
+    <div>
+      <Navbar handlePageChange={handlePageChange} />
+      <div className="container py-5 text-center">
+        {currentPage === 'home' && <Home />}
+        {currentPage === 'students' && <StudentList />}
+        {currentPage === 'faculties' && <FacultyList />}
+        {currentPage === 'bulk-upload' && <BulkUpload />} {/* Show Bulk Upload page */}
+      </div>
     </div>
   );
 }
